@@ -26,8 +26,8 @@ const AntdForm: React.FC = () => {
 
   const onFill = () => {
     form.setFieldsValue({
-      architecture: "Hello world!",
-      values: "male",
+      architecture: "[R1+R2]*R3",
+      values: "R1=5;R2=3;R3=4",
     });
   };
 
@@ -44,10 +44,10 @@ const AntdForm: React.FC = () => {
         label="Architecture"
         rules={[{ required: true }]}
       >
-        <Input />
+        <Input placeholder="[R1+R2]*R3"/>
       </Form.Item>
       <Form.Item name="values" label="Values" rules={[{ required: true }]}>
-        <Input />
+        <Input placeholder="R1=5;R2=3;R3=4"/>
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
