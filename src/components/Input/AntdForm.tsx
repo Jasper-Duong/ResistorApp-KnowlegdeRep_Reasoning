@@ -17,7 +17,7 @@ const AntdForm: React.FC = () => {
 
   const onFinish = (values: any) => {
     dispatch(setInputs(values));
-    console.log(values);
+    // console.log(values);
   };
 
   const onReset = () => {
