@@ -6,7 +6,7 @@ const Styled = styled(MainWrapper)`
     width: 100%;
     .ant-form-item-control-input-content {
       display: flex;
-      button {
+      button:first-of-type {
         margin-right: 1rem;
       }
     }
