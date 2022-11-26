@@ -4,6 +4,7 @@ import OutterLine from "./OutterLine";
 const Styled = styled.div`
   display: flex;
   align-items: center;
+  height: 100%;
   .ant-row {
     align-items: center;
   }

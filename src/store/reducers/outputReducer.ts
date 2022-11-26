@@ -1,30 +1,22 @@
 import { StateData } from "../../interfaces/stateData";
 import { store } from "../config.store";
-import { SET_INPUTS } from "../types/input.type";
-
-interface Inputs {
-  architecture: string;
-  values: string;
-}
+import { SET_RESULT } from "../types/input.type";
 
 type State = {
-  inputs: Inputs;
+  output: number;
 };
 
 const DEFAULT_STATE: State = {
-  inputs: {
-    architecture: "",
-    values: "",
-  },
+  output: 0,
 };
 
-export const inputReducer = (
+export const outputReducer = (
   state = DEFAULT_STATE,
   { type, payload }: StateData<any>
 ) => {
   switch (type) {
-    case SET_INPUTS:
-      state.inputs = { ...payload };
+    case SET_RESULT:
+      state.output = payload;
       return { ...state };
     default:
       return state;

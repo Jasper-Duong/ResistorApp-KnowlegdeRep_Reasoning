@@ -7,7 +7,7 @@ import OutterRight from "./OutterRight";
 
 const Styled = styled.div`
   margin: 1rem 0;
-  .architecture-row{
+  .architecture-row {
     align-items: center;
   }
 `;
@@ -15,6 +15,7 @@ const Styled = styled.div`
 export default function Architecture() {
   return (
     <Styled>
+      Circuit:
       <Row className="architecture-row">
         <Col span={2}>
           <OutterLeft />

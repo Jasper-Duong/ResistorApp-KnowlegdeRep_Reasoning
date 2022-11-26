@@ -1,30 +1,25 @@
+import { R } from "../../interfaces/resistor";
 import { StateData } from "../../interfaces/stateData";
 import { store } from "../config.store";
-import { SET_INPUTS } from "../types/input.type";
+import { SET_RESISTORS } from "../types/input.type";
 
-interface Inputs {
-  architecture: string;
-  values: string;
-}
+type Resistors = R[];
 
 type State = {
-  inputs: Inputs;
+  resistors: Resistors;
 };
 
 const DEFAULT_STATE: State = {
-  inputs: {
-    architecture: "",
-    values: "",
-  },
+  resistors: [],
 };
 
-export const inputReducer = (
+export const resistorsReducer = (
   state = DEFAULT_STATE,
   { type, payload }: StateData<any>
 ) => {
   switch (type) {
-    case SET_INPUTS:
-      state.inputs = { ...payload };
+    case SET_RESISTORS:
+      state.resistors = [...payload];
       return { ...state };
     default:
       return state;

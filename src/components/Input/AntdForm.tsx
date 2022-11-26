@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
-import { setInputs } from "../../store/actions/input.action";
+import { setInputs, setResistors } from "../../store/actions/input.action";
+import { R } from "../../interfaces/resistor";
+const math = require("mathjs");
 
 const layout = {
   labelCol: { span: 5 },
@@ -17,17 +19,38 @@ const AntdForm: React.FC = () => {
 
   const onFinish = (values: any) => {
     dispatch(setInputs(values));
+    const node = math.parse(values.architecture);
+    const resistors: R[] = [];
+    node.traverse(function (node: any) {
+      switch (node.type) {
+        case "OperatorNode":
+          // console.log(node.type, node.op)
+          break;
+        case "ParenthesisNode":
+          // console.log(node.type, node.value)
+          break;
+        case "SymbolNode":
+          // console.log(node.type, node.name)
+
+          resistors.push({ name: node.name });
+          break;
+        default:
+        // console.log(node.type)
+      }
+    });
+    dispatch(setResistors(resistors));
     // console.log(values);
   };
 
   const onReset = () => {
     form.resetFields();
+    dispatch(setInputs({ architecture: "", values: "" }));
+    dispatch(setResistors([]));
   };
 
   const onFill = () => {
     form.setFieldsValue({
-      architecture: "(R1+R2)*R3",
-      values: "R1=5;R2=3;R3=4",
+      architecture: "((R1+R2+R3)*R4)+(R5*R6)",
     });
   };
 
@@ -42,12 +65,15 @@ const AntdForm: React.FC = () => {
       <Form.Item
         name="architecture"
         label="Architecture"
-        rules={[{ required: true }]}
+        rules={[
+          { required: true },
+          {
+            pattern: /^[a-zA-Z 0-9\)\(\+\*]*$/,
+            message: "Only contain numbers, characters, (, ) , + and * ",
+          },
+        ]}
       >
-        <Input placeholder="(R1+R2)*R3"/>
-      </Form.Item>
-      <Form.Item name="values" label="Values" rules={[{ required: true }]}>
-        <Input placeholder="R1=5;R2=3;R3=4"/>
+        <Input placeholder="(R1+R2)*R3" />
       </Form.Item>
       <Form.Item {...tailLayout}>
         <Button type="primary" htmlType="submit">
