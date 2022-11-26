@@ -3,7 +3,7 @@ import { Col, Row } from "antd";
 import styled from "styled-components";
 // import { RootState } from "../../store/reducers/inputReducer";
 import { MainWrapper } from "../../styles/MainWrapper";
-import Circuit from "./Circuit";
+import Architecture from "./Architecture/Architecture";
 import Result from "./Result";
 
 const Styled = styled(MainWrapper)`
@@ -16,7 +16,8 @@ export default function Output() {
     <Styled>
       <Row>
         <Col span={24}>
-          <Circuit />
+          Circuit:
+          <Architecture />
         </Col>
         <Col span={24}>
           <Result />
